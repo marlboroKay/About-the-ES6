@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ES6快速入门-默认参数</title>
+</head>
+<script type="text/javascript">
+{
+	//ES3 ES5
+	function f(x,y,z){
+		y = y || 7;
+		z = z || 42;
+		return x+y+z;
+	}
+	console.log(f(1));
+}
+
+{
+	//ES6
+	function f(x,y=7,z=42){
+		return x+y+z;
+	}
+	console.log('ES6:'+f(1));
+}
+
+//验证参数是否为空
+{
+	function checkParameter(){
+		throw new Error('can\'t be empty!');
+	};
+	function f(x=checkParameter(),y=7,z=42){
+		return x+y+z;
+	}
+
+	console.log('checkParameter:'+f(1));
+
+	try{
+		f();
+	}catch(e){
+		console.log(e);
+	}
+}
+
+{
+	//ES3 ES5 参数可变
+	function f(){
+		var arr = Array.prototype.slice.call(arguments);
+		var sum = 0;
+		arr.forEach(function(item){
+			sum +=item;
+		});
+		return sum;
+	}
+
+	console.log(f(1,2,3))
+}
+
+{
+	//ES6 参数可变
+	function f(...a){
+		var sum = 0;
+		a.forEach(item=>{ sum+=item;});
+		return sum;
+	}
+	console.log('ES6:'+f(1,2,3))
+}
+
+{
+	//ES3 ES5 合并数组
+	var arr = ['hello','world'];
+	var other = [1,2,3].concat(arr);
+	console.log(other);
+}
+
+{
+	//ES6 合并数组
+	var arr = ['hello','world'];
+	var other = [1,2,3,...arr];
+	console.log(other);
+}
+</script>
+<body>
+	
+</body>
+</html>
