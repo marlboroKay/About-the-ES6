@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ES6快速入门-对象代理</title>
+</head>
+<script type = "text/javascript">
+/*对象代理*/
+//ES6
+
+//创建一个类
+{
+	let Person = {
+		'name':'es6',
+		'sex':'male',
+		'age':15
+	}
+
+	//声明一个实例
+	let person = new Proxy(Person,{
+		get(target,key){
+			return target[key];
+		},
+		set(target,key,value){
+			if(key !== 'sex'){
+				target[key] = value;
+			}
+		}
+	});
+	//读取实例
+	console.table({
+		'name':person.name,
+		'sex':person.sex,
+		'age':person.age
+	})
+	//修改实例
+	person.name = "es666";
+
+	try{
+		person.sex = "female";
+	}catch(e){
+		console.log(e)
+	}
+
+	person.age = 16;
+
+	console.table({
+		'name':person.name,
+		'sex':person.sex,
+		'age':person.age
+	});
+}
+
+//ES5
+{
+	//定义一个类
+	var Person = {
+		'name':'es5',
+		'sex':'male',
+		'age':15
+	};
+	//设置只读属性
+	Object.defineProperty(Person,'sex',{
+		writable:false,
+		value:'male'
+	});
+	//读取类
+	console.table({
+		'name':Person.name,
+		'sex':Person.sex,
+		'age':Person.age
+	});
+
+	//修改类
+	Person.name = 'es555';
+	Person.age = '16';
+
+	//捕获异常
+	try{
+		Person.sex = 'female';
+	}catch(e){
+		console.log(e);
+	}
+
+	//读取类
+	console.table({
+		'name':Person.name,
+		'sex':Person.sex,
+		'age':Person.age
+	});
+}
+
+//ES3、ES5
+{
+	//定义一个类
+	var Person = function(){
+		var data = {
+			'name':'es3',
+			'sex':'male',
+			'age':15
+		};
+		this.get = function(key){
+			return data[key];
+		};
+		this.set = function(key,value){
+			if(key !== 'sex'){
+				data[key] = value;
+			}
+		}
+	};
+	//声明一个实例
+	var person = new Person();
+	//读取实例
+	console.table({
+		'name':person.get('name'),
+		'sex':person.get('sex'),
+		'age':person.get('age')
+	});
+	try{
+		person.set('name','es333');
+		person.set('sex','female');
+		person.set('age',16);
+	}catch(e){
+		console.log(e);
+	}
+
+	console.table({
+		'name':person.get('name'),
+		'sex':person.get('sex'),
+		'age':person.get('age')
+	});
+}
+
+
+console
+</script>
+<body>
+	
+</body>
+</html>
