@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>常量&作用域</title>
+</head>
+<script type = "text/javascript">
+{
+	//ES5中的常量
+	Object.defineProperty(window,"PI",{
+		value:3.1415926,
+		writable:false
+	});
+	console.log(PI); //3.1415926
+
+	PI = 1111111111111
+
+	console.log(PI); //3.1415926
+}
+
+{
+	//ES6中的常量
+	const PI = 3.1415926;
+
+	console.log(PI); //3.1415926
+
+	try{
+		PI = 1111111111111
+	}catch(e){
+		console.log(e)
+	}
+
+}
+
+{
+	//ES5中的作用域
+	var arr = [];
+	for(var i = 0; i <= 2; i++){
+		arr[i] = function(){
+			return i*2;
+		}
+	}
+
+	console.table({
+		'arr[0]':arr[0](),
+		'arr[1]':arr[1](),
+		'arr[2]':arr[2]()
+	});
+	
+}
+
+{
+	//ES6中的作用域
+	var arr = [];
+	for(let i = 0; i <= 2; i++){
+		arr[i] = ()=>{
+			return i*2;
+		}
+	}
+	console.table({
+		'arr[0]':arr[0](),
+		'arr[1]':arr[1](),
+		'arr[2]':arr[2]()
+	});
+}
+</script>
+<body>
+	
+</body>
+</html>
