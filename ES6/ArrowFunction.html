@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>箭头函数</title>
+</head>
+<script type="text/javascript">
+{
+	//ES5 声明函数
+	var evens = [1,2,3,4,5];
+	var odds = evens.map(function(v){
+		return v+1;
+	});
+	console.log(evens,odds);
+}
+
+{
+	//ES6 声明函数
+	let evens = [1,2,3,4,5];
+	var odds = evens.map(v=>v+1);
+	console.log(evens,odds);
+}
+
+{
+	//ES5 this指向
+	var factery = function(){
+		this.a = 'a';
+		this.b = 'b';
+		this.c = {
+			a:'a+',
+			b:function(){
+				return this.a;
+			}
+		}
+	}
+
+	console.log(new factery().c.b());    //指向调用对象的a
+	
+}
+
+{
+	//ES6 this指向
+	var factery = function(){
+		this.a = 'a';
+		this.b = 'b';
+		this.c = {
+			a:'a+',
+			b:()=>{
+				return this.a;
+			}
+		}
+	}
+	console.log(new factery().c.b());  //指向该类的a
+}
+
+</script>
+
+<body>
+	
+</body>
+</html>
